@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Auth and Profile Creation</title>
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Content that will show once authentication is completed -->
+  <div id="content" style="display: none;">
+    <h1>Welcome, <span id="username"></span>!</h1>
+    <img id="profile-pic" src="" alt="Profile Picture">
+    <p>Your name: <span id="realname"></span></p>
+    <button id="logout-btn">Logout</button>
+  </div>
+
+  <!-- Placeholder for login/signup -->
+  <div id="auth-section" style="display: none;">
+    <h1>Please Login</h1>
+    <button id="login-btn">Login with Google</button>
+  </div>
+
+  <!-- Profile creation form -->
+  <div id="profile-creation" style="display: none;">
+    <h1>Create Your Profile</h1>
+    <form id="profile-form">
+      <div>
+        <label for="username">Username</label>
+        <input type="text" id="username-input" placeholder="Enter your username" required>
+      </div>
+      <div>
+        <label for="realname">Real Name</label>
+        <input type="text" id="realname-input" placeholder="Enter your real name" required>
+      </div>
+      <div>
+        <label for="profile-pic">Profile Picture</label>
+        <input type="file" id="profile-pic-input" accept="image/*" required>
+        <small>Max size: 10MB</small>
+      </div>
+      <div>
+        <button type="submit" id="submit-profile-btn">Create Profile</button>
+      </div>
+    </form>
+  </div>
+  <!-- Page creation and search options -->
+  <div id="main-options" style="display: none;">
+    <button id="create-page-btn">Create Page</button>
+    <button id="search-page-btn">Search Page</button>
+  </div>
+
+  <!-- Page creation form -->
+  <div id="create-page-section" style="display: none;">
+    <h1>Create a New Page</h1>
+    <form id="create-page-form">
+      <label for="page-name">Page Name:</label>
+      <input type="text" id="page-name" placeholder="Enter a unique page name" required>
+      
+      <label for="page-password">Page Password:</label>
+      <input type="password" id="page-password" placeholder="Enter a password for the page" required>
+      
+      <button type="submit">Create Page</button>
+    </form>
+  </div>
+
+  <!-- Search for an existing page -->
+  <div id="search-page-section" style="display: none;">
+    <h1>Search for a Page</h1>
+    <form id="search-page-form">
+      <label for="search-page-name">Page Name:</label>
+      <input type="text" id="search-page-name" placeholder="Enter the page name" required>
+
+      <label for="search-page-password">Page Password:</label>
+      <input type="password" id="search-page-password" placeholder="Enter the page password" required>
+
+      <button type="submit">Search Page</button>
+    </form>
+  </div>
+
+  <!-- Posts Section for Posting Content -->
+  <div id="page-content-section" style="display: none;">
+    <h1>Page: <span id="current-page-name"></span></h1>
+    <div id="posts"></div>
+    <form id="post-content-form">
+      <label for="post-message">Message:</label>
+      <textarea id="post-message" placeholder="Write your message"></textarea>
+
+      <label for="post-image">Image (optional):</label>
+      <input type="file" id="post-image" accept="image/*">
+
+      <button type="submit">Post Content</button>
+    </form>
+  </div>
+
+  <!-- Main script -->
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/main.js"></script>
+ 
+</body>
+</html>
+
+

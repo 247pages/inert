@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta name="google" content="notranslate">
+
+  <title>Inert - Firebase Page Creator</title>
+  <link rel="stylesheet" href="/css/feed.css">
+        <link rel="stylesheet" href="/css/applook.css">
+        <script src="/js/applook.js"></script>
+  <style>
+    /* Add basic styles for the tabs */
+    .tab {
+      display: none; /* Hide all tabs by default */
+    }
+    .active {
+      display: block; /* Show active tab */
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to Inert</h1>
+    <p>Create and manage your page with ease</p>
+  </header>
+
+  <main>
+    <section id="options-section">
+      <h2>Select an Option</h2>
+      <button id="createPageBtn">Create a New Page</button>
+      <button id="openPageBtn">Open an Existing Page</button>
+    </section>
+
+    <section id="create-page-section" class="tab">
+      <h2>Create a New Page</h2>
+      <form id="createPageForm">
+        <input type="text" id="uniqueName" placeholder="Unique Page Name" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="text" id="pageName" placeholder="Page Display Name" required>
+        <button type="submit">Create Page</button>
+      </form>
+    </section>
+
+    <section id="visit-page-section" class="tab">
+      <h2>Visit a Page</h2>
+      <form id="visitPageForm">
+        <input type="text" id="visitUniqueName" placeholder="Unique Page Name" required>
+        <input type="password" id="visitPassword" placeholder="Password" required>
+        <button type="submit">Visit Page</button>
+      </form>
+    </section>
+
+    <section id="page-content-section" class="tab">
+      <h2>Page Information</h2>
+      <div id="pageInfo">
+        <h3 id="pageNameDisplay">Page Name</h3>
+        <p id="pageBio">This is the page bio</p>
+        <img id="profilePicDisplay" src="default-profile-pic.jpg" alt="Profile Picture" style="width: 150px; height: 150px; border-radius: 50%;">
+      </div>
+
+      <h3>Update Profile Picture</h3>
+      <input type="file" id="profilePicInput" accept="image/*">
+
+      <h3>Post Content</h3>
+      <form id="postContentForm">
+        <textarea id="newPostText" placeholder="Write your post..." required></textarea>
+        <button type="submit">Post</button>
+      </form>
+
+      <div id="postsContainer">
+        <h3>Posts:</h3>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Inert. All rights reserved.</p>
+  </footer>
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage.js"></script>
+  <script type="module" src="/js/profile-setup.js"></script>
+</body>
+</html>

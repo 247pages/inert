@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram- Photo Sharing</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/css/postpage.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Add jQuery before Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</head>
+<body>
+  <div id="loader" style="display: none;">Uploading... <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></div>
+<div id="upload-status"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">Instagram- App</span>
+    <button id="logout-btn" class="btn btn-outline-light">Logout</button>
+  </nav>
+
+  <!-- Auth Section -->
+  <div id="auth-section" class="container mt-5">
+    <h2>Welcome!</h2>
+    <button id="login-btn" class="btn btn-primary">
+      <i class="bi bi-google"></i> Login with Google
+    </button>
+  </div>
+
+  <!-- Post Creation Section -->
+<div id="create-post-section" style="display: none;">
+    <form id="post-form">
+        <div class="form-group">
+            <label for="post-title">Title</label>
+            <input type="text" id="post-title" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="post-description">Description</label>
+            <textarea id="post-description" class="form-control" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="post-image">Images (max 7, 50MB total)</label>
+            <input type="file" id="post-image" class="form-control" multiple accept="image/*">
+            <div id="image-preview" class="mt-2"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Post</button>
+    </form>
+</div>
+
+
+  <!-- Posts Section -->
+  <div id="posts-section" class="container mt-5" style="display: none;">
+    <h3>Recent Posts</h3>
+    <div id="posts-container"></div>
+  </div>
+
+  <script type="module" src="/js/postpage.js"></script>
+
+</body>
+</html>
+    
+import { auth, db, storage } from './firebase-config.js';
+import { signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+import { collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+import { ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-storage.js";
+
+// DOM Elements
+const authSection = document.getElementById('auth-section');
+const createPostSection = document.getElementById('create-post-section');
+const postsSection = document.getElementById('posts-section');
+const postsContainer = document.getElementById('posts-container');
+const postForm = document.getElementById('post-form');
+const postTitle = document.getElementById('post-title');
+const postDescription = document.getElementById('post-description');
+const postImage = document.getElementById('post-image');
+const imagePreview = document.getElementById('image-preview');
+const uploadStatus = document.getElementById('upload-status'); // New element for status messages
+const loader = document.getElementById('loader'); // New loader element
+
+// Auth State
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    showPostCreation();
+    loadPosts();
+  } else {
+    showAuthSection();
+  }
+});
+
+// Show auth section
+function showAuthSection() {
+  authSection.style.display = 'block';
+  createPostSection.style.display = 'none';
+  postsSection.style.display = 'none';
+}
+
+// Show post creation section
+function showPostCreation() {
+  authSection.style.display = 'none';
+  createPostSection.style.display = 'block';
+  postsSection.style.display = 'block';
+}
+
+// Google Login
+document.getElementById('login-btn').addEventListener('click', async () => {
+  const provider = new GoogleAuthProvider();
+  await signInWithPopup(auth, provider);
+});
+
+// Logout
+document.getElementById('logout-btn').addEventListener('click', async () => {
+  await signOut(auth);
+  window.location.reload();
+});
+
+// Handle image selection and preview
+postImage.addEventListener('change', (e) => {
+  const files = e.target.files;
+  const totalSize = Array.from(files).reduce((sum, file) => sum + file.size, 0);
+  const previewContainer = imagePreview;
+
+  previewContainer.innerHTML = ''; // Clear previous previews
+
+  if (files.length > 7) {
+    alert("You can only upload a maximum of 7 images.");
+    postImage.value = '';
+    return;
+  }
+
+  if (totalSize > 50 * 1024 * 1024) {
+    alert("Total file size exceeds 50 MB.");
+    postImage.value = '';
+    return;
+  }
+
+  // Convert FileList to Array for easier manipulation
+  const filesArray = Array.from(files);
+
+  filesArray.forEach((file, index) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const imgDiv = document.createElement('div');
+      imgDiv.classList.add('image-preview-container', 'position-relative', 'd-inline-block', 'mr-2', 'mb-2');
+      imgDiv.innerHTML = `
+        <img src="${e.target.result}" class="img-thumbnail" style="width: 100px;" alt="Image Preview">
+        <button class="remove-image-btn" data-index="${index}" style="position: absolute; top: 0; right: 0; background: none; border: none; color: red; font-size: 18px; cursor: pointer;">&times;</button>
+      `;
+      previewContainer.appendChild(imgDiv);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
+// Remove image from preview
+imagePreview.addEventListener('click', (e) => {
+  if (e.target.classList.contains('remove-image-btn')) {
+    const indexToRemove = e.target.dataset.index;
+    const filesArray = Array.from(postImage.files);
+
+    // Remove the selected image file from the FileList
+    filesArray.splice(indexToRemove, 1);
+
+    // Update the FileList and re-render the previews
+    const newFileList = new DataTransfer();
+    filesArray.forEach(file => newFileList.items.add(file));
+    postImage.files = newFileList.files;
+
+    // Re-render image previews
+    postImage.dispatchEvent(new Event('change'));
+  }
+});
+
+// Create a Post
+postForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const user = auth.currentUser;
+  const title = postTitle.value;
+  const description = postDescription.value;
+  const files = postImage.files;
+
+  // Show loader and upload status
+  loader.style.display = 'block';
+  uploadStatus.textContent = "Uploading your post..."; // Update status message
+
+  // Prepare to upload images
+  const imageUrls = [];
+
+  // Only upload images if files are selected
+  if (files.length > 0) {
+    for (const file of files) {
+      const storageRef = ref(storage, `posts/${user.uid}/${file.name}`);
+      try {
+        await uploadBytes(storageRef, file);
+        const imageUrl = await getDownloadURL(storageRef);
+        imageUrls.push(imageUrl);
+      } catch (error) {
+        console.error("Error uploading image: ", error);
+        uploadStatus.textContent = "Error uploading images. Please try again."; // Update status message
+        loader.style.display = 'none'; // Hide loader
+        return;
+      }
+    }
+  }
+
+  // Add the post to Firestore
+  try {
+    const postDoc = await addDoc(collection(db, "posts"), {
+      userId: user.uid,
+      username: user.displayName,
+      title: title,
+      description: description,
+      imageUrls: imageUrls, // Store multiple URLs (can be empty)
+      reportCount: 0, // Initialize report count
+      timestamp: new Date(),
+    });
+
+    // Reset form fields
+    postTitle.value = '';
+    postDescription.value = '';
+    postImage.value = '';
+    imagePreview.innerHTML = ''; // Clear image previews
+    uploadStatus.textContent = "Post uploaded successfully!"; // Update status message
+
+    // Hide the success message after 3 seconds
+    setTimeout(() => {
+      uploadStatus.textContent = ''; // Clear the status message
+    }, 3000); // 3-second delay before clearing the message
+
+  } catch (error) {
+    console.error("Error creating post: ", error);
+    uploadStatus.textContent = "Error creating post. Please try again."; // Update status message
+  } finally {
+    loader.style.display = 'none'; // Hide loader
+  }
+});
+
+// Load Posts
+function loadPosts() {
+  onSnapshot(collection(db, "posts"), (snapshot) => {
+    postsContainer.innerHTML = '';  // Clear posts
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const postElement = createPostElement({
+        ...post,
+        imageUrls: post.imageUrls || [] // Ensure imageUrls is an array
+      }, doc.id);
+      postsContainer.appendChild(postElement);
+    });
+  });
+}
+
+// Create Post Element
+function createPostElement(post, postId) {
+  const user = auth.currentUser; // Get the current logged-in user
+
+  const postDiv = document.createElement('div');
+  postDiv.classList.add('post', 'card', 'mb-3');
+  postDiv.innerHTML = `
+    <div class="card-body">
+      <div class="d-flex justify-content-between">
+        <div>
+          <h5 class="card-title">${post.title}</h5>
+          <p class="card-text">${post.description}</p>
+        </div>
+        <!-- Three Dots Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-link text-dark three-dots-btn" type="button" id="dropdownMenuButton${postId}" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton${postId}">
+            <li><button class="dropdown-item report-post-btn">Report this post</button></li>
+            ${post.userId === user.uid ? `<li><button class="dropdown-item delete-post-btn">Delete this post</button></li>` : ''}
+          </ul>
+        </div>
+      </div>
+      ${post.imageUrls.length > 0 ? post.imageUrls.map(url => `<img src="${url}" class="img-fluid mb-3" alt="Post Image">`).join('') : '<p>No images for this post.</p>'}
+    </div>
+  `;
+
+  // Add event listeners
+  postDiv.querySelector('.delete-post-btn')?.addEventListener('click', () => handleDeletePost(postId));
+  postDiv.querySelector('.report-post-btn')?.addEventListener('click', () => handleReportPost(postId));
+
+  return postDiv;
+}
+
+// Handle Delete Post
+async function handleDeletePost(postId) {
+  const confirmed = confirm("Are you sure you want to delete this post?");
+  if (confirmed) {
+    await deleteDoc(doc(db, "posts", postId));
+    console.log("Post deleted successfully");
+  }
+}
+
+// Handle Report Post
+async function handleReportPost(postId) {
+  const postRef = doc(db, "posts", postId);
+  const postSnap = await getDoc(postRef);
+  const currentCount = postSnap.data().reportCount;
+
+  await updateDoc(postRef, {
+    reportCount: currentCount + 1
+  });
+
+  alert("Post reported successfully!");
+}

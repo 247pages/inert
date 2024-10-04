@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css"> <!-- Link to the new CSS file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+          <link rel="stylesheet" href="/css/applook.css">
+          <script src="/js/applook.js"></script>
+</head>
+<body>
+    <div id="loading-animation" style="display: none;">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Top Navigation Bar -->
+    <nav id="navbar" class="navbar navbar-dark bg-dark">
+        <div class="nav-logo">
+            <img src="path/to/your/logo.png" alt="Logo" class="logo">
+        </div>
+        <div class="menu-bars" onclick="toggleMenu()">
+            <i class="bi bi-list"></i> <!-- Bootstrap menu icon -->
+        </div>
+    </nav>
+
+    <!-- Side Menu -->
+<!-- Side Menu -->
+<div id="side-menu">
+    <div class="close-menu" onclick="toggleMenu()">&times;</div> <!-- Close icon -->
+    <a href="#auth-section">Login</a>
+    <a href="#profile-creation">Create Profile</a>
+    <a href="#content">Profile</a>
+    <a href="#" id="logout-btn">Logout</a>
+</div>
+
+
+    <div id="auth-section" class="container auth-section mt-5">
+        <h2>Welcome Back!</h2>
+        <p>Login with your Google account to access your profile and manage your settings.</p>
+        <button id="login-btn" class="btn btn-primary"><i class="bi bi-google"></i> Login with Google</button>
+    </div>
+
+    <div id="profile-creation" class="container mt-5" style="display: none;">
+        <h2>Create Profile</h2>
+        <form id="profile-form" class="form-group">
+            <input type="text" id="username-input" class="form-control mb-2" placeholder="Unique Username" required>
+            <input type="text" id="realname-input" class="form-control mb-2" placeholder="Real Name" required>
+            <textarea id="bio-input" class="form-control mb-2" placeholder="Bio" required></textarea>
+          <div class="profile-pic-wrapper">
+    <label for="profile-pic-input" class="custom-file-upload">
+        <i class="bi bi-camera"></i> Add Profile Pic
+    </label>
+    <input type="file" id="profile-pic-input" class="profile-pic-input" accept="image/*" onchange="previewImage(event)">
+    <div id="profile-pic-preview" class="profile-pic-preview"></div> <!-- For image preview -->
+</div>
+  <button type="submit" class="btn btn-success">Create Profile</button>
+        </form>
+    </div>
+
+    <div id="content" class="container mt-5" style="display: none;">
+        <h2>User Profile</h2>
+        <img id="profile-pic" class="rounded-circle mb-3" src="default-profile-pic.png" alt="Profile Picture" width="150" height="150">
+        <div>
+            <h4><span id="realname"></span></h4>
+            <p><span id="username"></span></p>
+            <p><span id="bio"></span></p>
+        </div>
+        <button id="edit-profile-btn" class="btn btn-secondary">Edit Profile</button>
+    </div>
+
+    <div id="edit-profile" class="container mt-5" style="display: none;">
+        <h2>Edit Profile</h2>
+        <form id="edit-profile-form" class="form-group">
+            <input type="text" id="edit-realname-input" class="form-control mb-2" placeholder="Real Name" required>
+            <textarea id="edit-bio-input" class="form-control mb-2" placeholder="Bio" required></textarea>
+           <!-- Profile Creation Section -->
+
+<!-- Edit Profile Section -->
+<div class="profile-pic-wrapper">
+    <label for="edit-profile-pic-input" class="custom-file-upload">
+        <i class="bi bi-camera"></i> Change Profile Pic
+    </label>
+    <input type="file" id="edit-profile-pic-input" class="profile-pic-input" accept="image/*" onchange="previewEditImage(event)">
+    <div id="edit-profile-pic-preview" class="profile-pic-preview"></div>
+</div>
+
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script type="module" src="/js/auth.js"></script> <!-- Link your JavaScript file -->     <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById("side-menu");
+            const menuBarsIcon = document.querySelector(".menu-bars i");
+
+            if (sideMenu.classList.contains("open")) {
+                sideMenu.classList.remove("open");
+                menuBarsIcon.classList.remove("bi-x");
+                menuBarsIcon.classList.add("bi-list");
+            } else {
+                sideMenu.classList.add("open");
+                menuBarsIcon.classList.remove("bi-list");
+                menuBarsIcon.classList.add("bi-x");
+            }
+        }
+
+        // Close the side menu if clicked outside
+        window.onclick = function(event) {
+            const sideMenu = document.getElementById("side-menu");
+            const menuBarsIcon = document.querySelector(".menu-bars i");
+
+            if (!sideMenu.contains(event.target) && !menuBarsIcon.contains(event.target)) {
+                sideMenu.classList.remove("open");
+                menuBarsIcon.classList.remove("bi-x");
+                menuBarsIcon.classList.add("bi-list");
+            }
+        };
+    </script>
+    <script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('profile-pic-preview');
+                preview.innerHTML = `<img src="${e.target.result}" alt="Profile Picture">`;
+                preview.style.display = 'block'; // Show preview
+            };
+            reader.readAsDataURL(file); // Convert file to base64 string
+        }
+    }
+</script>
+
+</body>
+</html>

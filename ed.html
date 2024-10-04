@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed Page</title>
+    <link rel="stylesheet" href="/css/feed.css">
+    <script type="module" src="/js/feed.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Feed</h1>
+    </header>
+
+    <main id="posts"></main>
+
+    <footer class="bottom-nav">
+        <button id="post-btn">Post</button>
+        <button id="home-btn">Home</button>
+        <button id="profile-btn">Profile</button>
+    </footer>
+
+    <div id="post-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h2>Create Post</h2>
+            <input type="text" id="post-title" placeholder="Post Title (optional)">
+            <textarea id="post-description" placeholder="Post Description (optional)"></textarea>
+            <input type="file" id="post-images" multiple accept="image/*">
+            <button id="submit-post">Submit</button>
+        </div>
+    </div>
+</body>
+</html>

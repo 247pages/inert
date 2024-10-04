@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TVN Connect - Student Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home-style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section id="hero" class="animate">
+        <div class="container">
+            <header>
+                <h1>TVN <span>Connect</span></h1>
+                <p>Welcome to the official student portal for <strong>Tulsi Vidya Niketan</strong></p>
+                <a href="#updates" class="cta-button">Get Latest Updates</a>
+            </header>
+        </div>
+        <div class="overlay"></div>
+    </section>
+
+    <!-- Updates Section -->
+    <section id="updates" class="animate">
+        <div class="container">
+            <h2>Latest News & Updates</h2>
+            <p>Stay connected and get the latest information about school activities, events, and announcements.</p>
+            <div class="updates-list">
+                <div class="update-item">
+                    <h3>Annual Sports Meet 2024</h3>
+                    <p>The sports meet is scheduled for October 10th, 2024. Register for events now!</p>
+                </div>
+                <div class="update-item">
+                    <h3>Exam Schedule Released</h3>
+                    <p>Midterm exam dates for all grades are out. Check the student dashboard for details.</p>
+                </div>
+                <div class="update-item">
+                    <h3>New Library Resources</h3>
+                    <p>The school library now offers a digital collection of eBooks for students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Section -->
+    <section id="forum" class="animate">
+        <div class="container">
+            <h2>Student Forum</h2>
+            <p>Discuss topics, ask questions, and interact with fellow students and teachers.</p>
+            <a href="#login" class="cta-button">Join the Conversation</a>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="animate">
+        <div class="container">
+            <h2>School Resources</h2>
+            <p>Access the school's digital resources, eBooks, assignments, and study materials in one place.</p>
+            <div class="resource-links">
+                <a href="#">Class Assignments</a>
+                <a href="#">eBooks</a>
+                <a href="#">Library Resources</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 TVN Connect - Student Portal | Built for TVN Students</p>
+    </footer>
+
+    <script src="/js/scripts.js"></script>
+</body>
+</html>
+body {
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  margin-bottom: 30px;
+}
+
+#auth-section {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+#create-post-section{
+  display:none;
+}
+#post-form {
+  margin-bottom: 20px;
+  display: none;
+  /* Hide the post form section */
+}
+#posts-container .post {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all sections with 'animate' class
+    const sections = document.querySelectorAll('.animate');
+
+    // Create Intersection Observer to detect when elements are in view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view'); // Add 'in-view' class when in viewport
+            } else {
+                entry.target.classList.remove('in-view'); // Remove 'in-view' class when out of viewport
+            }
+        });
+    });
+
+    // Apply observer to each section
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
