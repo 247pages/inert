@@ -1,0 +1,303 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Prevent body scroll */
+}
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color:
+    
+    #000323;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.logo img {
+    height: 40px; /* Adjust this height as needed */
+    max-width: auto; /* Maintain aspect ratio */
+}
+
+.icons {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between icons */
+}
+
+.icons {
+    color: #43d0eb; /* Default color for icons */
+    font-size: 24px; /* Icon size */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+/* Change color of the bell icon */
+.fa-bell {
+    color:#43d0eb;/* Change to your desired color */
+}
+
+.fa-bell:hover {
+    color: 43d0eb; /* Change color on hover for better interaction */
+}
+
+.icon:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.error-popup {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.error-popup.show {
+    opacity: 1; /* Show the popup */
+}
+
+#chatContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-top: 50px; 
+    margin-bottom: 100px; /* Space for header */
+    padding: 0px;
+    box-sizing: border-box;
+    overflow: hidden; /* Prevent overflow */
+    background: linear-gradient(270deg, #8c35f1, #43d0eb);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite; /* Animated gradient */
+    position: relative;
+}
+
+#messagesContainer {
+    flex: 1;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.5); /* Dark translucent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border-radius: 8px; /* Adjust for smooth corners */
+    padding: 10px; /* Simplified padding */
+    margin-bottom: 0px; /* Space for the input field */
+    position: relative;
+}
+
+/* Add space above the oldest message */
+#messagesContainer::before {
+    content: '';
+    display: block;
+    height: 20px; /* Space for visual separation */
+    width: 100%;
+}
+
+.message {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background for messages */
+    backdrop-filter: blur(5px); /* Additional blur effect */
+    border-radius: 8px;
+    position: relative;
+    word-wrap: break-word; /* Breaks long words to fit within the container */
+}
+
+/* Style for the message header */
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 10px;
+    font-size: 16px;
+    background-color: #ff5733; /* Default color, will be overridden dynamically */
+}
+
+.message-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.messageName {
+    font-weight: bold;
+}
+
+.messageUsername {
+    font-style: italic;
+    color: #bbb;
+    font-size: 0.9em;
+}
+
+.messageText {
+    margin-bottom: 10px; /* Reduced bottom margin */
+}
+
+.messageTimestamp {
+    font-size: 0.8em;
+    color: #aaa;
+    text-align: right;
+    margin-top: 10px;
+}
+/* User's own messages with same background as others but distinctive border */
+.my-message {
+    background-color: rgba(255, 255, 255, 0.1); /* Transparent background for messages */
+    backdrop-filter: blur(5px); /* Additional blur effect */
+    border-left: 4px solid #37B4FF; /* Bright blue border on the left */
+    border-radius: 8px; /* Rounded corners */
+    padding: 10px; /* Padding for better spacing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+    color: #ffffff; /* White text for contrast */
+}
+
+/* Adjust message text styles for clarity */
+.messageText {
+    color: #ffffff; /* White color for message text for better visibility */
+}
+
+.messageName,
+.messageUsername {
+    color: #e0e0e0; /* Light color for name and username for clarity */
+}
+
+/* Optional: Add a hover effect for interaction */
+.my-message:hover {
+    background-color: #666; /* Slightly darker on hover for interaction */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+#divider {
+    height: 0px;
+    background-color: #555;
+    margin: 10px 0;
+    flex-shrink: 0; /* Ensure the divider does not shrink */
+}
+
+#messageInputContainer {
+    background-color: #222;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-radius: 0 0 10px 10px; /* Rounded corners on the bottom of the input container */
+}
+
+#messageInput {
+    width: calc(100% - 60px);
+    padding: 10px;
+    margin-bottom:20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    background-color: #333;
+    color: #fff;
+    box-sizing: border-box;
+}
+#messageInput:focus {
+    outline: none; /* Remove the default outline */
+    border: 2px solid #007bff; /* Change the border color on focus */
+    background-color: #444; /* Optional: change the background color on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: add a subtle shadow effect */
+}
+
+
+#sendButton {
+    background-color: #007bff;
+    color: linear-gradient(270deg, #8c35f1, #43d0eb);
+    border: none;
+    border-radius: 50%;
+    margin-bottom:20px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#sendButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Highlight for current user's messages */
+.side-menu {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 999999;
+    top: 0;
+    right: 0; /* Change to right */
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.side-menu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.side-menu a:hover {
+    color: #f1f1f1;
+}
+
+.side-menu .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px; /* Change to left */
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Other CSS remains unchanged */

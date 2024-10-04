@@ -1,0 +1,76 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #f4f4f4;
+    padding: 20px;
+}
+
+/* Header Styling */
+.header {
+    background: linear-gradient(135deg, #ff6b6b, #ff4757);
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+    color: #ff6b6b;
+    margin-bottom: 20px;
+}
+
+/* Privacy Content Section */
+.privacy-content {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+ul {
+    margin: 10px 0 20px 20px;
+    list-style: disc;
+}
+
+/* Footer Styling */
+footer.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #1f1f1f;
+    margin-top: 20px;
+}
+
+footer.footer p {
+    margin: 0;
+}
+
+/* Gradient and Dark Theme */
+a {
+    color: #ff6b6b;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

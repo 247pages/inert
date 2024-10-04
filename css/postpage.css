@@ -1,0 +1,432 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text color for readability */
+    margin: 0;
+    padding: 0;
+}
+
+/* Navbar Styling */
+/* Navbar Styles */
+.navbar {
+    background-color: #212529; /* Darker background for the navbar */
+    border-bottom: 1px solid #444; /* Subtle border for depth */
+    padding: 10px 20px; /* Adjusted padding for navbar */
+}
+
+/* Plus Icon Button */
+#add-post-btn {
+    background-color: #212529; 
+    outline-color:#343a40;
+    outline: 2px;/* Bootstrap primary color */
+    border: none; /* Remove default border */
+    width: 30px; /* Fixed width for consistency */
+    height: 30px; /* Fixed height for consistency */
+    border-radius: 30%; /* Circular shape */
+    display: flex; /* Center the icon */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    margin-right: 20px; /* Added margin-right for spacing from the menu icon */
+}
+
+#add-post-btn:hover {
+    background-color: #F43434; /* Darken on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+.dropdown .btn {
+    background-color: #212529; /* Blue background */
+    color: white; /* White text */
+    border: none; /* Remove default border */
+    padding: 5px 10px; /* Add padding for size */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Adjust font size */
+    display: flex; /* Flex layout for better alignment */
+    align-items: center; /* Center icon vertically */
+}
+
+/* Hover effects */
+.dropdown .btn:hover {
+    background-color: #F43434; /* Darker blue on hover */
+    color: white; /* Keep white text */
+    transition: background-color 0.2s ; /* Smooth hover transition */
+}
+
+
+
+/* Dropdown Menu Styles */
+.dropdown-menu {
+    background-color: #686868; /* Dark background for dropdown */
+    border: none; /* Remove default border */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Dropdown Items */
+.dropdown-item {
+    color: #e0e0e0; /* Light text color for readability */
+    padding: 10px 15px; /* Padding for items */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.dropdown-item:hover {
+    background-color: #007bff; /* Highlight background on hover */
+    color: #ffffff; /* Change text color on hover */
+}
+
+/* Menu Icon (Three Bars) */
+.dropdown-toggle {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 10px; /* Padding for spacing */
+    color: #ffffff; /* White color for the icon */
+    font-size: 24px; /* Size for the icon */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.dropdown-toggle:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+/* Custom Style for Menu Icon Container */
+.dropdown {
+    position: relative; /* Position relative for dropdown */
+}
+
+.dropdown-menu-end {
+    right: 0; /* Align dropdown to the right */
+    left: auto; /* Reset left alignment */
+}
+
+/* General Styling for Buttons */
+.btn {
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for all buttons */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Slight lift effect on hover */
+}
+/* Dropdown Item Styles */
+.dropdown-item {
+    color: #e0e0e0; /* Light text color for readability */
+    padding: 10px 15px; /* Padding for items */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover Effect for Dropdown Items */
+.dropdown-item:hover {
+    background-color: #007bff; /* Highlight background on hover */
+    color: #ffffff; /* Change text color on hover */
+}
+
+/* Icon Styling */
+.dropdown-item i {
+    font-size: 1.2em; /* Adjust icon size */
+}
+
+
+/* Popup Alert */
+.popup-alert {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.popup-content {
+    background-color: #fff;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 500px; /* Set a max width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content h4 {
+    margin: 0 0 10px;
+    color:#000000;
+}
+
+.popup-content p {
+    margin: 10px 0 20px;
+    color:#060505;
+}
+
+.close-btn {
+    color: #FA4A4A;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Basic styles for the post container */
+/* Basic styles for the post container */
+.post {
+  opacity: 0; /* Hidden by default for scroll reveal */
+  transform: translateY(20px); /* Start position for the animation */
+  transition: all 0.5s ease-out; /* Smooth transition for the reveal */
+}
+
+.post.show {
+  opacity: 1; /* Fully visible when revealed */
+  transform: translateY(0); /* Reset position */
+}
+
+/* Carousel indicator (dot) styles */
+/* Carousel indicator (dot) styles */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px; /* Adjusted for better spacing */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  z-index: 15; /* Ensure indicators are above other elements */
+}
+
+.carousel-indicators button {
+  width: 12px; /* Dot size */
+  height: 12px;
+  background-color: #CAC0C0; /* Default color for inactive dots with transparency */
+  border-radius: 50%; /* Circle shape */
+  margin: 0 6px; /* Adjusted spacing */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.carousel-indicators .active {
+  background-color: #F43434; /* Color for the active dot */
+  transform: scale(1.5); /* Slightly enlarge the active dot */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.7); /* Red glow effect */
+ /* Glow effect for the active dot */
+}
+
+.carousel-indicators button:hover {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly brighter on hover */
+  transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Card styles */
+.card {
+  border: none; /* Remove default border */
+  background-color: #1e1e1e; /* Dark card background */
+  border-radius: 8px; /* Rounded corners for cards */
+  overflow: hidden; /* Ensures rounded corners on images */
+}
+
+/* Image styles */
+.card img {
+  border-radius: 8px; /* Rounded corners for images */
+}
+
+/* Dropdown menu styles */
+
+
+.dropdown-item {
+  color: #e0e0e0; /* Light text color for dropdown items */
+}
+
+.dropdown-item:hover {
+  background-color: #007bff; /* Highlight background on hover */
+}
+
+
+.popup-alert {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+}
+
+.popup-content {
+  background-color: #fff;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+  max-width: 500px; /* Set a max width */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup-content h4 {
+  margin: 0 0 10px;
+}
+
+.popup-content p {
+  margin: 10px 0 20px;
+}
+
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #F43434;
+}
+
+
+
+
+
+
+
+
+/* auth-section.css */
+
+
+/* Centering the auth container */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Make the container take full height */
+    padding: 20px; /* Reduce padding for smaller screens */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    max-width: 400px; /* Set a max width for the container */
+    margin: auto; /* Center the container horizontally */
+}
+
+/* Title styling */
+.auth-title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ff0080, #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textHighlight 2s infinite alternate;
+}
+
+/* Message styling */
+.auth-message {
+    font-size: 1.1rem;
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+/* Button styling */
+.btn-login {
+    background: linear-gradient(to right, #ff0080, #ff8c00);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 15px 1px;
+    font-size: 1.1rem;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 0, 128, 0.5);
+}
+
+/* Keyframes for animation */
+@keyframes textHighlight {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .auth-title {
+        font-size: 2rem; /* Reduce font size for smaller screens */
+    }
+
+    .auth-message {
+        font-size: 1rem; /* Reduce font size for smaller screens */
+    }
+
+    .btn-login {
+        width: 100%; /* Make button full-width on mobile */
+    }
+
+    .auth-container {
+        padding: 10px; /* Adjust padding for smaller screens */
+    }
+}
+/* CSS for the image container */
+.image-container {
+    width: 100%; /* Full width to ensure it adapts to screen size */
+    display: flex; /* Center the image inside */
+    justify-content: center; /* Center the image */
+    margin-bottom: 20px; /* Spacing below the image */
+}
+
+.image-container img {
+    max-width: 100%; /* Make sure the image does not exceed the container width */
+    max-height: 200px; /* Set a max height to maintain aspect ratio */
+    object-fit: contain; /* Maintain the aspect ratio of the image */
+    border-radius: 10px; /* Optional: Add rounded corners to the image */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* General styling for the dropdown button */
+
+/* Dropdown menu styling */

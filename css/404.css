@@ -1,0 +1,144 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', monospace;
+}
+
+body {
+    background: linear-gradient(135deg, #111, #222);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Error Message Styling */
+.error-message h1 {
+    font-size: 8rem;
+    margin-bottom: 20px;
+    color: #ff6b6b;
+    animation: glitch 1.5s infinite;
+}
+
+.error-message p {
+    font-size: 1.3rem;
+    margin: 10px 0;
+}
+
+.error-message ul {
+    list-style: none;
+    padding: 0;
+}
+
+.error-message ul li {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #f39c12;
+}
+
+.error-message strong {
+    color: #ffdd57;
+}
+
+.error-message em {
+    color: #ff6b6b;
+}
+
+.btn-home {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #e74c3c;
+    transform: scale(1.05);
+}
+
+/* Astronaut Image */
+.astronaut img {
+    width: 300px;
+    height: auto;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Footer */
+footer.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    color: #ccc;
+}
+
+footer.footer a {
+    color: #ff6b6b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer.footer a:hover {
+    color: #f39c12;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 2px 2px #e74c3c, -2px -2px #3498db;
+    }
+    50% {
+        text-shadow: 4px 4px #f39c12, -4px -4px #9b59b6;
+    }
+    100% {
+        text-shadow: 2px 2px #e74c3c, -2px -2px #3498db;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .error-message h1 {
+        font-size: 5rem;
+    }
+
+    .astronaut img {
+        width: 200px;
+    }
+}

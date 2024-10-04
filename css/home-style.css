@@ -1,0 +1,165 @@
+/* Importing Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #1b1b1b;
+    color: #ffffff;
+}
+
+section {
+    opacity: 0; /* Hidden by default */
+    transform: translateY(50px); /* Start below the viewport */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Animation when section is visible */
+.animate.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hero Section */
+#hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(145deg, #007BFF, #ff3366);
+    color: white;
+    text-align: center;
+}
+
+#hero header {
+    z-index: 2;
+}
+
+#hero h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+#hero span {
+    color: #ffeb3b;
+}
+
+#hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    background-color: #ff3366;
+    color: white;
+    padding: 15px 30px;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ff5722;
+}
+
+/* Updates Section */
+#updates {
+    background-color: #333333;
+    padding: 80px 0;
+    text-align: center;
+}
+
+#updates h2 {
+    font-size: 2.5rem;
+    color: #ffeb3b;
+}
+
+.updates-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.update-item {
+    background-color: #444444;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.update-item h3 {
+    font-size: 1.8rem;
+    color: #ffeb3b;
+}
+
+.update-item p {
+    font-size: 1.2rem;
+}
+
+.update-item:hover {
+    transform: translateY(-10px);
+}
+
+/* Forum Section */
+#forum {
+    background-color: #282828;
+    padding: 80px 0;
+    text-align: center;
+}
+
+#forum h2 {
+    font-size: 2.5rem;
+    color: #00e676;
+}
+
+/* Resources Section */
+#resources {
+    background-color: #121212;
+    padding: 80px 0;
+    text-align: center;
+}
+
+#resources h2 {
+    font-size: 2.5rem;
+    color: #ffeb3b;
+}
+
+.resource-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.resource-links a {
+    background-color: #444444;
+    color: #ffeb3b;
+    padding: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.resource-links a:hover {
+    background-color: #ff5722;
+}
+
+/* Footer */
+footer {
+    background-color: #000000;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 0.9rem;
+}

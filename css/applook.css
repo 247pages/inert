@@ -1,0 +1,24 @@
+/* Disable blue tap highlight on mobile links */
+a, img {
+  -webkit-tap-highlight-color: transparent; /* Mobile tap highlight */
+  outline: none;
+}
+
+/* Disable text selection on the entire website */
+body, a, img {
+  user-select: none; /* Disable text selection globally */
+  -webkit-user-select: none; /* For Safari */
+  -ms-user-select: none; /* For IE10+ */
+}
+
+/* Remove default link decoration and hover styles (you can customize your own in your main CSS) */
+a {
+  text-decoration: none;
+}
+
+/* Remove default long-press or context menu actions on all images */
+img {
+  pointer-events: none; /* Disables right-click and long-press actions on images */
+}
+
+/* No custom hover effect is added here. You can add your own hover styles in your main CSS file */
