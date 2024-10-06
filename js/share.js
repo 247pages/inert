@@ -17,7 +17,7 @@ const uploadStatus = document.getElementById('upload-status');
 const loader = document.getElementById('loader'); 
 
 // Character limits
-const TITLE_CHAR_LIMIT = 50;
+const TITLE_CHAR_LIMIT = 100;
 const DESCRIPTION_CHAR_LIMIT = 600;
 
 // Create custom alert popup
