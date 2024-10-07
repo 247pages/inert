@@ -144,7 +144,8 @@ function createPostElement(post, postId) {
   postDiv.classList.add('post', 'card', 'mb-3');
 
   // Check if there are multiple images
-  const imagesContent = post.imageUrls.length > 0 ? `
+   // Check if there are multiple images
+const imagesContent = post.imageUrls.length > 0 ? `
 <!-- Simplified Carousel for multiple images with only indicators -->
 <div id="carousel${postId}" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -164,29 +165,30 @@ function createPostElement(post, postId) {
 </div>
   ` : '<p>No images for this post.</p>';
 
-  postDiv.innerHTML = `
-    <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <div>
-          <h5 class="card-title">${post.title}</h5>
-          <p class="card-text">${post.description}</p>
-        </div>
-        <!-- Three Dots Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-link text-dark three-dots-btn" type="button" id="dropdownMenuButton${postId}" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-three-dots"></i>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton${postId}">
-            <li><button class="dropdown-item report-post-btn">Report this post</button></li>
-            ${post.userId === user.uid ? `<li><button class="dropdown-item delete-post-btn">Delete this post</button></li>` : ''}
-          </ul>
-        </div>
+postDiv.innerHTML = `
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <div>
+        <h5 class="card-title">${post.title}</h5>
       </div>
-      ${imagesContent}
+      <!-- Three Dots Dropdown -->
+      <div class="dropdown">
+        <button class="btn btn-link text-dark three-dots-btn" type="button" id="dropdownMenuButton${postId}" data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="bi bi-three-dots"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton${postId}">
+          <li><button class="dropdown-item report-post-btn">Report this post</button></li>
+          ${post.userId === user.uid ? `<li><button class="dropdown-item delete-post-btn">Delete this post</button></li>` : ''}
+        </ul>
+      </div>
     </div>
-  `;
+    ${imagesContent}
+    <p class="card-text">${post.description}</p>
+  </div>
+`;
 
-  return postDiv;
+return postDiv;
+             
 }
 
 // Change slide based on dot click
