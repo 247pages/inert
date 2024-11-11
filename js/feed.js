@@ -148,7 +148,7 @@ onAuthStateChanged(auth, async (user) => {
         }
     } else {
         showErrorPopup("User not logged in.");
-        window.location.href = '/auth.html';  // Redirect to signup page if not logged in
+        window.location.href = '/inert/auth.html';  // Redirect to signup page if not logged in
     }
 });
 
